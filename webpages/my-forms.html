@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFA - My Forms</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../forms.css">
+</head>
+<body>
+  <header class="site-header">
+    <img id="emblem" src="../assets/emblem.png" alt="Navistad emblem">
+    <div class="divider"></div>
+    <div class="org">
+      <strong>Navistadi Ministry of Foreign Affairs</strong>
+      <strong>Ministerium Rerum Externarum Navistadense</strong>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <a href="../index.html">Home</a>
+    <a href="my-forms.html" class="active">My Forms</a>
+  </nav>
+
+  <main>
+    <h1>My Forms</h1>
+    <p class="form-note">Drafts are kept for 14 days from the day they are created, then removed.</p>
+
+    <div class="tabs">
+      <button class="tab active" data-target="drafts" type="button">Drafts</button>
+      <button class="tab" data-target="submitted" type="button">Submitted</button>
+    </div>
+
+    <div class="tab-content active" id="drafts">
+      <table>
+        <thead>
+          <tr><th>Form</th><th>Applicant</th><th>Created</th><th>Status</th><th>Expires</th><th></th></tr>
+        </thead>
+        <tbody id="drafts-body"></tbody>
+      </table>
+    </div>
+
+    <div class="tab-content" id="submitted">
+      <table>
+        <thead>
+          <tr><th>Form</th><th>Applicant</th><th>Submitted</th><th>Reference</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody id="submitted-body"></tbody>
+      </table>
+    </div>
+
+    <noscript><p>This page needs JavaScript to show your saved forms.</p></noscript>
+
+    <p class="demo-note">Fictional demo site for the state of Navistad. Forms are saved in this browser only.</p>
+  </main>
+
+  <script src="../scripts.js"></script>
+  <script src="../forms.js"></script>
+</body>
+</html>

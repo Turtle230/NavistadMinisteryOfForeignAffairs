@@ -1,0 +1,193 @@
+/* Navistadi passport flipbook. Loaded after styles.css, uses its colour variables. */
+
+.passport-hint {
+  margin: -16px 0 24px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.passport-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  padding: 40px 0 10px;
+  overflow-x: clip;
+}
+
+/* ---------- The book ---------- */
+.book {
+  --pw: clamp(120px, 34vw, 440px);   /* width of one page */
+  --ph: calc(var(--pw) * 1.4151);    /* page height, matches the PDF pages */
+  --turn: 1600ms;                     /* keep in sync with TURN_MS in passport.js */
+  --ease: cubic-bezier(.645, .045, .355, 1);
+
+  position: relative;
+  width: calc(var(--pw) * 2);
+  height: var(--ph);
+  perspective: 4000px;
+  cursor: pointer;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--turn) var(--ease);
+}
+.book:focus-visible { outline: 3px solid var(--green); outline-offset: 12px; }
+
+/* While closed, slide the book left so the cover sits in the middle */
+.book[data-state="cover"] { transform: translateX(calc(var(--pw) * -0.5)); }
+
+/* Soft shadow on the "table", shrinks to the cover while closed */
+.book::before {
+  content: "";
+  position: absolute;
+  left: 1%;
+  right: 1%;
+  bottom: -18px;
+  height: 36px;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, .38), transparent 68%);
+  filter: blur(7px);
+  transition: left var(--turn) var(--ease);
+}
+.book[data-state="cover"]::before { left: 50%; }
+
+/* ---------- Pages ---------- */
+.page-base,
+.leaf {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+}
+.page-base { z-index: 0; }
+
+.leaf {
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform var(--turn) var(--ease);
+  will-change: transform;
+}
+.leaf.flipped { transform: rotateY(-180deg); }
+
+/* A little page lift when you hover the page you can turn */
+.leaf.next:not(.flipped):hover { transform: rotateY(-5deg); }
+.leaf.prev.flipped:hover { transform: rotateY(-175deg); }
+
+.face {
+  position: absolute;
+  inset: 0;
+}
+.face,
+.page-base {
+  border-radius: 0 6px 6px 0;
+  background: #ece2cd;
+}
+.leaf .face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.face.back {
+  transform: rotateY(180deg);
+  border-radius: 6px 0 0 6px;
+}
+.face img,
+.page-base img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Shading near the spine, so the pages look bound */
+.face::after,
+.page-base::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(0, 0, 0, .32), rgba(0, 0, 0, .07) 7%, transparent 16%);
+}
+.face.back::after {
+  background: linear-gradient(to left, rgba(0, 0, 0, .32), rgba(0, 0, 0, .07) 7%, transparent 16%);
+}
+
+/* Darkening that sweeps over a page while it is mid-turn */
+.leaf.turning .face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(20, 15, 5, .05), rgba(20, 15, 5, .5));
+  animation: turn-shade var(--turn) ease-in-out;
+}
+.leaf.turning .face.back::before {
+  background: linear-gradient(to left, rgba(20, 15, 5, .05), rgba(20, 15, 5, .5));
+}
+@keyframes turn-shade {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---------- Controls ---------- */
+.pp-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+.pp-label {
+  min-width: 260px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--green);
+}
+.pp-btn:disabled { opacity: .35; cursor: default; }
+.pp-btn:disabled:hover { background: var(--green); }
+
+.pp-note {
+  margin: 0;
+  max-width: 560px;
+  text-align: center;
+  font-size: .95rem;
+  color: #555;
+}
+
+.pp-extras { display: flex; gap: 28px; }
+.pp-link {
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--green);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.pp-link:hover { color: var(--green-dark); }
+
+@media (max-width: 800px) {
+  .passport-hint { font-size: 1rem; }
+  /* Let the book use the full phone width instead of the padded content column */
+  .passport-stage { margin-inline: calc(-1 * clamp(16px, 13vw, 290px)); }
+  .book { --pw: min(44vw, 300px); }
+  .pp-label { min-width: 0; width: 100%; order: -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book { --turn: 20ms; }
+  .leaf.turning .face::before { animation: none; }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFA - Application for Naturalisation</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../forms.css">
+</head>
+<body>
+  <header class="site-header">
+    <img id="emblem" src="../assets/emblem.png" alt="Navistad emblem">
+    <div class="divider"></div>
+    <div class="org">
+      <strong>Navistadi Ministry of Foreign Affairs</strong>
+      <strong>Ministerium Rerum Externarum Navistadense</strong>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <a href="../index.html">Home</a>
+    <a href="my-forms.html">My Forms</a>
+  </nav>
+
+  <main>
+    <h1>Application for Naturalisation</h1>
+
+    <div class="form-banner" id="form-banner" role="status"></div>
+
+    <form id="app-form" class="app-form" novalidate autocomplete="off">
+      <fieldset>
+        <legend>1. Personal details</legend>
+        <div class="fields">
+          <div class="field">
+            <label class="req" for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" required>
+          </div>
+          <div class="field">
+            <label class="req" for="givenNames">Given names</label>
+            <input type="text" id="givenNames" name="givenNames" required>
+          </div>
+          <div class="field">
+            <label class="req" for="dob">Date of birth</label>
+            <input type="date" id="dob" name="dob" required>
+          </div>
+          <div class="field">
+            <label class="req" for="sex">Sex</label>
+            <select id="sex" name="sex" required>
+              <option value="">Choose...</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="req" for="placeOfBirth">Place of birth</label>
+            <input type="text" id="placeOfBirth" name="placeOfBirth" required>
+          </div>
+          <div class="field">
+            <label class="req" for="nationality">Current nationality</label>
+            <input type="text" id="nationality" name="nationality" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Contact and residence</legend>
+        <div class="fields">
+          <div class="field">
+            <label class="req" for="email">Email address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div class="field wide">
+            <label class="req" for="address">Home address in Navistad</label>
+            <textarea id="address" name="address" required></textarea>
+          </div>
+          <div class="field">
+            <label class="req" for="arrival">Date you first arrived in Navistad</label>
+            <input type="date" id="arrival" name="arrival" required>
+          </div>
+          <div class="field">
+            <label class="req" for="permit">Residence permit number</label>
+            <input type="text" id="permit" name="permit" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Declaration</legend>
+        <label class="check">
+          <input type="checkbox" name="intendToReside" required>
+          <span>I intend to continue living in Navistad if my application is approved.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="declareTrue" required>
+          <span>I declare that the information in this application is true and complete.</span>
+        </label>
+        <div class="fields">
+          <div class="field wide">
+            <label class="req" for="signature">Type your full name as your signature</label>
+            <input type="text" id="signature" name="signature" required>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="form-actions" id="form-actions">
+      <button class="btn secondary" id="btn-save" type="button">Save as draft</button>
+      <button class="btn" id="btn-submit" type="button">Submit application</button>
+    </div>
+    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+
+    <noscript><p>This form needs JavaScript to save and submit applications.</p></noscript>
+
+    <a class="btn secondary" href="my-forms.html">Go to My Forms</a>
+  </main>
+
+  <script src="../forms.js"></script>
+</body>
+</html>

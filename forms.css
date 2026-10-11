@@ -1,0 +1,132 @@
+/* Application form and My Forms additions. Loaded after styles.css, uses its colour variables. */
+
+/* Make the hidden attribute win over any display rule below */
+[hidden] { display: none !important; }
+
+.form-note {
+  margin: -16px 0 24px;
+  font-size: 1.05rem;
+  color: #555;
+}
+
+.form-banner {
+  margin: 0 0 24px;
+  padding: 14px 20px;
+  background: #fff;
+  border-left: 6px solid var(--green);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.form-banner a { color: var(--green); }
+
+/* ---------- Form ---------- */
+.app-form fieldset {
+  margin: 0 0 28px;
+  padding: 22px 26px 8px;
+  background: #fff;
+  border: 0;
+  border-left: 6px solid var(--green);
+}
+.app-form legend {
+  float: left;          /* keeps the heading inside the white box */
+  width: 100%;
+  padding: 0;
+  margin-bottom: 18px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--green);
+}
+.app-form legend + * { clear: both; }
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 26px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.field.wide { grid-column: 1 / -1; }
+
+.app-form label { font-size: 1rem; }
+.app-form label.req::after { content: " *"; color: #b3261e; }
+
+.app-form input[type="text"],
+.app-form input[type="email"],
+.app-form input[type="tel"],
+.app-form input[type="date"],
+.app-form select,
+.app-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #a9a9a9;
+  border-radius: 3px;
+}
+.app-form textarea { min-height: 90px; resize: vertical; }
+.app-form input:focus,
+.app-form select:focus,
+.app-form textarea:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+.app-form input:disabled,
+.app-form select:disabled,
+.app-form textarea:disabled { background: #f3f3f3; color: #444; cursor: default; }
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 16px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+.check input { flex: none; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--green); }
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 8px 0 14px;
+}
+.btn.secondary {
+  background: #fff;
+  color: var(--green);
+  box-shadow: inset 0 0 0 2px var(--green);
+}
+.btn.secondary:hover { background: #e4eef4; }
+
+.form-status { min-height: 1.5em; margin: 0 0 28px; font-weight: 600; color: var(--green); }
+.form-status.error { color: #b3261e; }
+.form-status a { color: inherit; }
+
+/* ---------- My Forms ---------- */
+.actions { white-space: nowrap; }
+.row-btn {
+  padding: 4px 8px;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--green);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.row-btn:hover { color: var(--green-dark); }
+.row-btn.danger { color: #b3261e; }
+.expires.warn { color: var(--notice-text); font-weight: 600; }
+.empty { padding: 18px 12px; color: #555; }
+.empty a { color: var(--green); }
+
+@media (max-width: 800px) {
+  .tab-content { overflow-x: auto; }
+  .form-note { font-size: 1rem; }
+  .app-form fieldset { padding: 18px 16px 6px; }
+}

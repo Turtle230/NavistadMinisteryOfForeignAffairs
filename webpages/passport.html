@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFA - Explore the Navistadi Passport</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../passport.css">
+</head>
+<body>
+  <header class="site-header">
+    <img id="emblem" src="../assets/emblem.png" alt="Navistad emblem">
+    <div class="divider"></div>
+    <div class="org">
+      <strong>Navistadi Ministry of Foreign Affairs</strong>
+      <strong>Ministerium Rerum Externarum Navistadense</strong>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <a href="../index.html">Home</a>
+    <a href="my-forms.html">My Forms</a>
+  </nav>
+
+  <main>
+    <h1>Explore the Navistadi Passport</h1>
+    <p class="passport-hint">Click the right-hand page to turn forward and the left-hand page to go back. Arrow keys and swipes work too.</p>
+
+    <section class="passport-stage" aria-label="Navistadi passport viewer">
+      <div class="book" id="book" tabindex="0" role="group" aria-label="Navistadi passport. Use the left and right arrow keys to turn pages."></div>
+
+      <div class="pp-controls">
+        <button class="btn pp-btn" id="pp-prev" type="button">&larr; Previous</button>
+        <span class="pp-label" id="pp-label" aria-live="polite"></span>
+        <button class="btn pp-btn" id="pp-next" type="button">Next &rarr;</button>
+      </div>
+
+      <p class="pp-note" id="pp-motion-note" hidden>Your device has "reduce motion" switched on, so the pages turn instantly instead of animating.</p>
+
+      <div class="pp-extras">
+        <button class="pp-link" id="pp-cover" type="button">Back to cover</button>
+        <button class="pp-link" id="pp-sound" type="button" aria-pressed="true"></button>
+      </div>
+    </section>
+
+    <noscript><p>The passport viewer needs JavaScript to turn its pages.</p></noscript>
+
+    <a class="btn" href="../index.html">Back to Home</a>
+  </main>
+
+  <script src="../passport.js"></script>
+</body>
+</html>
